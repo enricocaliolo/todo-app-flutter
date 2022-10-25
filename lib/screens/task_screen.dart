@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../interfaces/interfaces.dart';
-import '../widgets/form.dart';
+import "../interfaces/interfaces.dart";
+import "../widgets/form.dart";
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as TitleTask;
+    final args = ModalRoute.of(context)!.settings.arguments as Task;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit task'),
+        title: const Text("Edit task"),
       ),
       body: Center(
         child: Container(
@@ -24,7 +24,8 @@ class TaskScreen extends StatelessWidget {
                 height: 10.0,
               ),
               CustomForm(
-                action: 'edit',
+                action: "edit",
+                hintText: "Enter the new name of the task.",
                 taskTitle: args.title,
               ),
             ],

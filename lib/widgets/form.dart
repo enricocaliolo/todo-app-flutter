@@ -6,10 +6,12 @@ class CustomForm extends StatefulWidget {
   const CustomForm({
     super.key,
     required this.action,
+    required this.hintText,
     this.taskTitle,
   });
 
   final String action;
+  final String hintText;
   final String? taskTitle;
 
   @override
@@ -29,7 +31,7 @@ class _CustomFormState extends State<CustomForm> {
           TextFormField(
             controller: _controller,
             decoration: InputDecoration(
-              hintText: "Digite a task aqui. ",
+              hintText: widget.hintText,
               suffixIcon: IconButton(
                 icon: const Icon(Icons.clear),
                 onPressed: () => _controller.clear(),
@@ -64,9 +66,9 @@ class _CustomFormState extends State<CustomForm> {
                 //   const SnackBar(content: Text('Processing data...')),
                 // );
                 // cleaning TextFormField
-                if (widget.action == 'submit') {
+                if (widget.action == "submit") {
                   context.read<Tasks>().add(_controller.text);
-                } else if (widget.action == 'edit') {
+                } else if (widget.action == "edit") {
                   context
                       .read<Tasks>()
                       .edit(widget.taskTitle, _controller.text);

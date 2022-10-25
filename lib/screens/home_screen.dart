@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/widgets/task_widget.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
+import '../interfaces/interfaces.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: const Center(
-            child: Text('Todo List'),
+            child: Text("Todo List"),
           ),
         ),
         body: Center(
@@ -30,7 +32,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 10.0),
                 const CustomForm(
-                  action: 'submit',
+                  action: "submit",
+                  hintText: "Digite a task aqui.",
                 ),
                 const SizedBox(height: 20.0),
                 const Center(
@@ -48,8 +51,8 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: context.watch<Tasks>().tasks.length,
                     itemBuilder: (context, index) {
-                      final item = tasks[index];
-                      return item;
+                      final Task task = tasks[index];
+                      return TaskWidget(task: task);
                     },
                   ),
                 ),
