@@ -36,26 +36,47 @@ class HomeScreen extends StatelessWidget {
                   hintText: "Digite a task aqui.",
                 ),
                 const SizedBox(height: 20.0),
-                const Center(
-                  child: Text(
-                    "Tasks",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+                ElevatedButton(
+                  style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.red),
                   ),
+                  onPressed: () => context.read<Tasks>().deleteAll(),
+                  child: const Text("CLEAR ALL"),
                 ),
                 const SizedBox(height: 20.0),
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: context.watch<Tasks>().tasks.length,
-                    itemBuilder: (context, index) {
-                      final Task task = tasks[index];
-                      return TaskWidget(task: task);
-                    },
-                  ),
-                ),
+                // if()
+                (context.watch<Tasks>().tasks.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'No tasks',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                    : Expanded(
+                        child: Column(
+                          children: [
+                            const Center(
+                              child: Text(
+                                "Tasks",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: context.watch<Tasks>().tasks.length,
+                              itemBuilder: (context, index) {
+                                final Task task = tasks[index];
+                                return TaskWidget(task: task);
+                              },
+                            ),
+                          ],
+                        ),
+                      ))
               ],
             ),
           ),

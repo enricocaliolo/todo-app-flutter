@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import './providers/tasks.dart';
 import './providers/providers.dart';
 import './screens/screens.dart';
 
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<Tasks>().initialState();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

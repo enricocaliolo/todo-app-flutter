@@ -42,7 +42,7 @@ class TaskWidget extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 icon: const Icon(Icons.delete),
                 color: Colors.red,
-                onPressed: () => context.read<Tasks>().delete(task.title),
+                onPressed: () => context.read<Tasks>().delete(task),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/interfaces/interfaces.dart';
 import '../providers/providers.dart';
 
 class CustomForm extends StatefulWidget {
@@ -67,12 +68,12 @@ class _CustomFormState extends State<CustomForm> {
                 // );
                 // cleaning TextFormField
                 if (widget.action == "submit") {
-                  context.read<Tasks>().add(_controller.text);
+                  context.read<Tasks>().add(Task(title: _controller.text));
                 } else if (widget.action == "edit") {
                   context
                       .read<Tasks>()
                       .edit(widget.taskTitle, _controller.text);
-                  // Navigator.pop(context);
+                  Navigator.pop(context);
                 }
 
                 _controller.clear();
