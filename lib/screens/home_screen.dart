@@ -45,38 +45,44 @@ class HomeScreen extends StatelessWidget {
                   child: const Text("CLEAR ALL"),
                 ),
                 const SizedBox(height: 20.0),
-                // if()
-                (context.watch<Tasks>().tasks.isEmpty
+
+                (context.watch<Tasks>().state == UpdateState.loading
                     ? const Center(
-                        child: Text(
-                          'No tasks',
-                          style: TextStyle(fontSize: 20),
-                        ),
+                        child: CircularProgressIndicator(),
                       )
-                    : Expanded(
-                        child: Column(
-                          children: [
-                            const Center(
-                              child: Text(
-                                "Tasks",
-                                style: TextStyle(fontSize: 20),
-                              ),
+                    : (context.watch<Tasks>().tasks.isEmpty
+                        ? const Center(
+                            child: Text(
+                              'No tasks',
+                              style: TextStyle(fontSize: 20),
                             ),
-                            const SizedBox(
-                              height: 20.0,
+                          )
+                        : Expanded(
+                            child: Column(
+                              children: [
+                                const Center(
+                                  child: Text(
+                                    "Tasks",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      context.watch<Tasks>().tasks.length,
+                                  itemBuilder: (context, index) {
+                                    final Task task = tasks[index];
+                                    return TaskWidget(task: task);
+                                  },
+                                ),
+                              ],
                             ),
-                            ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: context.watch<Tasks>().tasks.length,
-                              itemBuilder: (context, index) {
-                                final Task task = tasks[index];
-                                return TaskWidget(task: task);
-                              },
-                            ),
-                          ],
-                        ),
-                      ))
+                          )))
+                // if()
               ],
             ),
           ),

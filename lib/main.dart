@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<Tasks>().initialState();
+    // context.read<Tasks>().initialState();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

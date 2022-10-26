@@ -5,8 +5,11 @@ import "package:provider/provider.dart";
 import "../interfaces/interfaces.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
+enum UpdateState { loading, success, error, idle }
+
 class Tasks with ChangeNotifier {
   List<Task> _tasks = [];
+  var state = UpdateState.idle;
 
   Tasks() {
     initialState();
@@ -14,8 +17,12 @@ class Tasks with ChangeNotifier {
 
   List get tasks => _tasks;
 
-  void initialState() {
-    syncDataWithProvider();
+  void initialState() async {
+    state = UpdateState.loading;
+    notifyListeners();
+    await syncDataWithProvider();
+    state = UpdateState.success;
+    notifyListeners();
   }
 
   void add(Task task) {
@@ -71,7 +78,5 @@ class Tasks with ChangeNotifier {
     if (result != null) {
       _tasks = result.map((task) => Task.fromJson(json.decode(task))).toList();
     }
-
-    notifyListeners();
   }
 }
