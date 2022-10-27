@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/interfaces/interfaces.dart';
+import 'package:uuid/uuid.dart';
+
+import '../interfaces/interfaces.dart';
 import '../providers/providers.dart';
 
 class CustomForm extends StatefulWidget {
@@ -8,12 +10,13 @@ class CustomForm extends StatefulWidget {
     super.key,
     required this.action,
     required this.hintText,
-    this.taskTitle,
+    this.task,
   });
 
   final String action;
   final String hintText;
-  final String? taskTitle;
+  // final String? taskTitle;
+  final Task? task;
 
   @override
   State<CustomForm> createState() => _CustomFormState();
@@ -68,11 +71,12 @@ class _CustomFormState extends State<CustomForm> {
                 // );
                 // cleaning TextFormField
                 if (widget.action == "submit") {
-                  context.read<Tasks>().add(Task(title: _controller.text));
-                } else if (widget.action == "edit") {
+                  final uuid = const Uuid().v4();
                   context
                       .read<Tasks>()
-                      .edit(widget.taskTitle, _controller.text);
+                      .add(Task(id: uuid, title: _controller.text));
+                } else if (widget.action == "edit") {
+                  context.read<Tasks>().edit(widget.task?.id, _controller.text);
                   Navigator.pop(context);
                 }
 

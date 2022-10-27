@@ -8,7 +8,7 @@ class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Task;
+    final task = ModalRoute.of(context)!.settings.arguments as Task;
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class TaskScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  args.title,
+                  task.title,
                   style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class TaskScreen extends StatelessWidget {
               CustomForm(
                 action: "edit",
                 hintText: "Enter the new name of the task.",
-                taskTitle: args.title,
+                task: task,
               ),
             ],
           ),

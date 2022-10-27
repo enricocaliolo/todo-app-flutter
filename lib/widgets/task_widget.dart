@@ -15,7 +15,7 @@ class TaskWidget extends StatelessWidget {
       onTap: () => {
         Navigator.of(context).pushNamed(
           '/task',
-          arguments: Task(title: task.title),
+          arguments: Task(id: task.id, title: task.title),
         ),
         FocusManager.instance.primaryFocus?.unfocus(),
       },

@@ -12,18 +12,10 @@ class TaskListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //                           scrollDirection: Axis.vertical,
-    //                           shrinkWrap: true,
-    //                           itemCount: context.watch<Tasks>().tasks.length,
-    //                           itemBuilder: (context, index) {
-    //                             final Task task = tasks[index];
-    //                             return TaskWidget(task: task);
-    //                           },
-    //                         )
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: context.watch<Tasks>().tasks.length,
       itemBuilder: (context, index) {
         final Task task = tasks[index];

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import "package:flutter/material.dart";
-import "package:provider/provider.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 import "../interfaces/interfaces.dart";
@@ -32,7 +31,7 @@ class Tasks with ChangeNotifier {
   }
 
   void delete(Task task) {
-    _tasks.removeWhere((element) => element.title == task.title);
+    _tasks.removeWhere((element) => element.id == task.id);
     updateSharedPreferences();
     notifyListeners();
   }
@@ -43,11 +42,11 @@ class Tasks with ChangeNotifier {
     notifyListeners();
   }
 
-  void edit(String? taskTitle, String newTaskTitle) {
+  void edit(String? id, String newTaskTitle) {
     List<Task> newTasks = [];
 
     for (final task in _tasks) {
-      if (task.title == taskTitle) {
+      if (task.id == id) {
         task.title = newTaskTitle;
       }
       newTasks.add(task);
@@ -55,6 +54,7 @@ class Tasks with ChangeNotifier {
 
     _tasks = newTasks;
 
+    updateSharedPreferences();
     notifyListeners();
   }
 
