@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../interfaces/interfaces.dart';
-import './task_widget.dart';
+import './widgets.dart';
 import '../providers/providers.dart';
 
 class TaskListWidget extends StatelessWidget {

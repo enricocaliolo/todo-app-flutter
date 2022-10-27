@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/widgets/task_widget.dart';
 
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
@@ -11,7 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tasks = context.watch<Tasks>().tasks;
+    final List<Task> tasks = context.watch<Tasks>().tasks;
 
     return GestureDetector(
       onTap: () {
@@ -69,16 +68,7 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 20.0,
                                 ),
-                                ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      context.watch<Tasks>().tasks.length,
-                                  itemBuilder: (context, index) {
-                                    final Task task = tasks[index];
-                                    return TaskWidget(task: task);
-                                  },
-                                ),
+                                TaskListWidget(tasks: tasks)
                               ],
                             ),
                           )))

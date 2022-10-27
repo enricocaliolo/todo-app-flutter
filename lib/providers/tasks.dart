@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-import "../interfaces/interfaces.dart";
 import "package:shared_preferences/shared_preferences.dart";
+
+import "../interfaces/interfaces.dart";
 
 enum UpdateState { loading, success, error, idle }
 
@@ -15,7 +15,7 @@ class Tasks with ChangeNotifier {
     initialState();
   }
 
-  List get tasks => _tasks;
+  List<Task> get tasks => _tasks;
 
   void initialState() async {
     state = UpdateState.loading;
